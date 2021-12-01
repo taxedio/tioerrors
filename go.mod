@@ -1,4 +1,4 @@
-module gitlab.com/t2750/errors
+module taxedio_errors
 
 go 1.17
 
