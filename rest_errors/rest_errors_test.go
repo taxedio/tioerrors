@@ -1,10 +1,11 @@
 package taxedio_errors
 
 import (
-	"testing"
-	"github.com/stretchr/testify/assert"
-	"net/http"
 	"errors"
+	"net/http"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewInternalServerError(t *testing.T) {
