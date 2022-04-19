@@ -7,6 +7,49 @@ import (
 	"net/http"
 )
 
+var (
+	StatusMsg = map[int]string{
+		http.StatusBadRequest:                    "bad_request",
+		http.StatusPaymentRequired:               "payment_required",
+		http.StatusForbidden:                     "forbidden",
+		http.StatusNotFound:                      "not_found",
+		http.StatusMethodNotAllowed:              "method_not_allowed",
+		http.StatusNotAcceptable:                 "method_not_allowed",
+		http.StatusProxyAuthRequired:             "proxy_auth_required",
+		http.StatusRequestTimeout:                "request_timeout",
+		http.StatusConflict:                      "conflict",
+		http.StatusGone:                          "gone",
+		http.StatusLengthRequired:                "length_required",
+		http.StatusPreconditionFailed:            "precondition_failed",
+		http.StatusRequestEntityTooLarge:         "payload_too_large",
+		http.StatusRequestURITooLong:             "uri_too_long",
+		http.StatusUnsupportedMediaType:          "unsupported_media_type",
+		http.StatusRequestedRangeNotSatisfiable:  "range_not_satisfiable",
+		http.StatusExpectationFailed:             "expectation_failed",
+		http.StatusTeapot:                        "im_a_teapot",
+		http.StatusMisdirectedRequest:            "misdirected_request",
+		http.StatusUnprocessableEntity:           "unprocessable_entity",
+		http.StatusLocked:                        "locked",
+		http.StatusFailedDependency:              "failed_dependency",
+		http.StatusTooEarly:                      "too_early",
+		http.StatusUpgradeRequired:               "upgrade_required",
+		http.StatusPreconditionRequired:          "precondition_required",
+		http.StatusTooManyRequests:               "too_many_requests",
+		http.StatusRequestHeaderFieldsTooLarge:   "request_header_fields_too_large",
+		http.StatusUnavailableForLegalReasons:    "unavailable_for_legal_reasons",
+		http.StatusInternalServerError:           "internal_server_error",
+		http.StatusNotImplemented:                "not_implemented",
+		http.StatusBadGateway:                    "bad_gateway",
+		http.StatusServiceUnavailable:            "service_unavailable",
+		http.StatusGatewayTimeout:                "gateway_timeout",
+		http.StatusHTTPVersionNotSupported:       "http_version_not_supported",
+		http.StatusVariantAlsoNegotiates:         "variant_also_negotiates",
+		http.StatusInsufficientStorage:           "insufficient_storage",
+		http.StatusLoopDetected:                  "loop_detected",
+		http.StatusNotExtended:                   "not_extended",
+		http.StatusNetworkAuthenticationRequired: "network_authentication_required"}
+)
+
 type RestErr interface {
 	Message() string
 	Status() int
@@ -39,87 +82,8 @@ func (e restErr) Causes() []interface{} {
 }
 
 func HttpStatusMaker(r restErr) *restErr {
-	switch r.Status() {
-	// 400s
-	case http.StatusBadRequest: // 400
-		r.ErrError = "bad_request"
-	case http.StatusPaymentRequired: // 402
-		r.ErrError = "payment_required"
-	case http.StatusForbidden: // 403
-		r.ErrError = "forbidden"
-	case http.StatusNotFound: // 404
-		r.ErrError = "not_found"
-	case http.StatusMethodNotAllowed: // 405
-		r.ErrError = "method_not_allowed"
-	case http.StatusNotAcceptable: // 406
-		r.ErrError = "method_not_allowed"
-	case http.StatusProxyAuthRequired: // 407
-		r.ErrError = "proxy_auth_required"
-	case http.StatusRequestTimeout: // 408
-		r.ErrError = "request_timeout"
-	case http.StatusConflict: // 409
-		r.ErrError = "conflict"
-	case http.StatusGone: // 410
-		r.ErrError = "gone"
-	case http.StatusLengthRequired: // 411
-		r.ErrError = "length_required"
-	case http.StatusPreconditionFailed: // 412
-		r.ErrError = "precondition_failed"
-	case http.StatusRequestEntityTooLarge: // 413
-		r.ErrError = "payload_too_large"
-	case http.StatusRequestURITooLong: // 414
-		r.ErrError = "uri_too_long"
-	case http.StatusUnsupportedMediaType: // 415
-		r.ErrError = "unsupported_media_type"
-	case http.StatusRequestedRangeNotSatisfiable: // 416
-		r.ErrError = "range_not_satisfiable"
-	case http.StatusExpectationFailed: // 417
-		r.ErrError = "expectation_failed"
-	case http.StatusTeapot: // 418
-		r.ErrError = "im_a_teapot"
-	case http.StatusMisdirectedRequest: // 421
-		r.ErrError = "misdirected_request"
-	case http.StatusUnprocessableEntity: // 422
-		r.ErrError = "unprocessable_entity"
-	case http.StatusLocked: // 423
-		r.ErrError = "locked"
-	case http.StatusFailedDependency: // 424
-		r.ErrError = "failed_dependency"
-	case http.StatusTooEarly: // 425
-		r.ErrError = "too_early"
-	case http.StatusUpgradeRequired: // 426
-		r.ErrError = "upgrade_required"
-	case http.StatusPreconditionRequired: // 428
-		r.ErrError = "precondition_required"
-	case http.StatusTooManyRequests: // 429
-		r.ErrError = "too_many_requests"
-	case http.StatusRequestHeaderFieldsTooLarge: // 431
-		r.ErrError = "request_header_fields_too_large"
-	case http.StatusUnavailableForLegalReasons: // 451
-		r.ErrError = "unavailable_for_legal_reasons"
-	// 500s
-	case http.StatusInternalServerError: // 500
-		r.ErrError = "internal_server_error"
-	case http.StatusNotImplemented: // 501
-		r.ErrError = "not_implemented"
-	case http.StatusBadGateway: // 502
-		r.ErrError = "bad_gateway"
-	case http.StatusServiceUnavailable: // 503
-		r.ErrError = "service_unavailable"
-	case http.StatusGatewayTimeout: // 504
-		r.ErrError = "gateway_timeout"
-	case http.StatusHTTPVersionNotSupported: // 505
-		r.ErrError = "http_version_not_supported"
-	case http.StatusVariantAlsoNegotiates: // 506
-		r.ErrError = "variant_also_negotiates"
-	case http.StatusInsufficientStorage: // 507
-		r.ErrError = "insufficent_storage"
-	case http.StatusLoopDetected: // 508
-		r.ErrError = "loop_detected"
-	case http.StatusNotExtended: // 510
-		r.ErrError = "not_extended"
-	case http.StatusNetworkAuthenticationRequired: // 511
-		r.ErrError = "network_authentication_required"
+	if errMsg, ok := StatusMsg[r.ErrStatus]; ok {
+		r.ErrError = errMsg
 	}
 	return &r
 }

@@ -104,7 +104,7 @@ var (
 		{http.StatusVariantAlsoNegotiates, // 506,
 			"variant_also_negotiates"},
 		{http.StatusInsufficientStorage, // 507,
-			"insufficent_storage"},
+			"insufficient_storage"},
 		{http.StatusLoopDetected, // 508,
 			"loop_detected"},
 		{http.StatusNotExtended, // 510,
@@ -120,7 +120,7 @@ func Test_restErr_Error(t *testing.T) {
 		e    restErr
 		want string
 	}{
-		{"test 1", test1, "message: testmessage - status: 400 - error: test1 - causes: []"},
+		{"test 1", test1, "message: testmessage - status: 400 - error: bad_request - causes: []"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
