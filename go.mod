@@ -1,3 +1,3 @@
-module gitlab.com/taxedio/tioerrors
+module github.com/taxedio/tioerrors
 
 go 1.17
