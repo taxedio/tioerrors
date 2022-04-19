@@ -15,10 +15,10 @@ type RestErr interface {
 }
 
 type restErr struct {
-	ErrMessage string        `json:"message"`
-	ErrStatus  int           `json:"status"`
-	ErrError   string        `json:"error"`
-	ErrCauses  []interface{} `json:"causes"`
+	ErrMessage string        `json:"message" xml:"message" bson:"message" protobuf:"message" yaml:"message" datastore:"message" schema:"message" asn:"message" `
+	ErrStatus  int           `json:"status" xml:"status" bson:"status" protobuf:"status" yaml:"status" datastore:"status" schema:"status" asn:"status" `
+	ErrError   string        `json:"error" xml:"error" bson:"error" protobuf:"error" yaml:"error" datastore:"error" schema:"error" asn:"error" `
+	ErrCauses  []interface{} `json:"causes" xml:"causes" bson:"causes" protobuf:"causes" yaml:"causes" datastore:"causes" schema:"causes" asn:"causes" `
 }
 
 func (e restErr) Error() string {
